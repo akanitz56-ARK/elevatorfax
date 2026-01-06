@@ -868,7 +868,10 @@
             setTimeout(() => nextScreen(3), 600);
             setTimeout(() => nextScreen(4), 900);
             setTimeout(() => nextScreen(5), 1200);
-            setTimeout(() => nextScreen(6), 1500);
+            setTimeout(() => {
+                updateReview();
+                nextScreen(6);
+            }, 1500);
         }
 
         // Update progress bar
