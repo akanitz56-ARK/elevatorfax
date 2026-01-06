@@ -370,7 +370,7 @@
         .info-value {
             font-size: 18px;
             font-weight: 600;
-            color: var(--navy);
+            color: var(--cream);
         }
 
         .badge-container {
@@ -863,24 +863,55 @@
             document.getElementById('yearInstalled').value = '2019';
             document.getElementById('capacity').value = '4500';
 
-            // Animate through all screens quickly
-            setTimeout(() => nextScreen(2), 300);
-            setTimeout(() => nextScreen(3), 600);
-            setTimeout(() => nextScreen(4), 900);
-            setTimeout(() => nextScreen(5), 1200);
+            // Animate through all screens at a slower pace
             setTimeout(() => {
-                // Navigate to screen 6 first
-                nextScreen(6);
-                // Then populate the review screen after a brief delay
-                setTimeout(() => {
-                    document.getElementById('reviewId').textContent = 'ELV-2019-847362';
-                    document.getElementById('reviewBuilding').textContent = 'Salesforce Tower';
-                    document.getElementById('reviewAddress').textContent = '415 Mission Street, San Francisco, CA 94105';
-                    document.getElementById('reviewManufacturer').textContent = 'Otis';
-                    document.getElementById('reviewYear').textContent = '2019';
-                    document.getElementById('reviewCapacity').textContent = '4500 lbs';
-                }, 100);
+                document.getElementById('screen1').classList.remove('active');
+                currentScreen = 2;
+                document.getElementById('screen2').classList.add('active');
+                updateProgress();
+            }, 500);
+            
+            setTimeout(() => {
+                document.getElementById('screen2').classList.remove('active');
+                currentScreen = 3;
+                document.getElementById('screen3').classList.add('active');
+                updateProgress();
+            }, 1000);
+            
+            setTimeout(() => {
+                document.getElementById('screen3').classList.remove('active');
+                currentScreen = 4;
+                document.getElementById('screen4').classList.add('active');
+                updateProgress();
             }, 1500);
+            
+            setTimeout(() => {
+                document.getElementById('screen4').classList.remove('active');
+                currentScreen = 5;
+                document.getElementById('screen5').classList.add('active');
+                updateProgress();
+            }, 2000);
+            
+            setTimeout(() => {
+                document.getElementById('screen5').classList.remove('active');
+                currentScreen = 6;
+                document.getElementById('screen6').classList.add('active');
+                updateProgress();
+                
+                // Use requestAnimationFrame to ensure DOM is painted
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        document.getElementById('reviewId').textContent = 'ELV-2019-847362';
+                        document.getElementById('reviewBuilding').textContent = 'Salesforce Tower';
+                        document.getElementById('reviewAddress').textContent = '415 Mission Street, San Francisco, CA 94105';
+                        document.getElementById('reviewManufacturer').textContent = 'Otis';
+                        document.getElementById('reviewYear').textContent = '2019';
+                        document.getElementById('reviewCapacity').textContent = '4500 lbs';
+                    });
+                });
+            }, 2500);
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         // Update progress bar
