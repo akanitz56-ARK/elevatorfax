@@ -855,7 +855,7 @@
 
         // Load demo data
         function loadDemo() {
-            // Fill in all the demo data
+            // Fill in all the demo data in form fields
             document.getElementById('elevatorId').value = 'ELV-2019-847362';
             document.getElementById('buildingName').value = 'Salesforce Tower';
             document.getElementById('address').value = '415 Mission Street, San Francisco, CA 94105';
@@ -869,8 +869,17 @@
             setTimeout(() => nextScreen(4), 900);
             setTimeout(() => nextScreen(5), 1200);
             setTimeout(() => {
-                updateReview();
+                // Navigate to screen 6 first
                 nextScreen(6);
+                // Then populate the review screen after a brief delay
+                setTimeout(() => {
+                    document.getElementById('reviewId').textContent = 'ELV-2019-847362';
+                    document.getElementById('reviewBuilding').textContent = 'Salesforce Tower';
+                    document.getElementById('reviewAddress').textContent = '415 Mission Street, San Francisco, CA 94105';
+                    document.getElementById('reviewManufacturer').textContent = 'Otis';
+                    document.getElementById('reviewYear').textContent = '2019';
+                    document.getElementById('reviewCapacity').textContent = '4500 lbs';
+                }, 100);
             }, 1500);
         }
 
