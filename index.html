@@ -967,15 +967,15 @@
         const totalScreens = 6;
         const formData = {};
 
-        // Load demo data - REAL Florida Elevator with REAL inspection data
+        // Load demo data - REAL Florida Elevator, ~10 years old, 6 landings
         function loadDemo() {
             // Fill in with REAL Florida elevator data
-            // License #61240 - Terrace V @ Heritage Cove, Fort Myers
-            document.getElementById('elevatorId').value = '61240';
-            document.getElementById('buildingName').value = 'Terrace V @ Heritage Cove Association';
-            document.getElementById('address').value = '14081 Brant Point Circle, Fort Myers, FL 33919';
-            document.getElementById('manufacturer').value = 'KONE';
-            document.getElementById('yearInstalled').value = '2010';
+            // License #104485 - Olympus Harbour Island Parking Garage, Tampa
+            document.getElementById('elevatorId').value = '104485';
+            document.getElementById('buildingName').value = 'Olympus Harbour Island Parking Garage';
+            document.getElementById('address').value = '301 Harbour Place Drive, Tampa, FL 33602';
+            document.getElementById('manufacturer').value = 'ThyssenKrupp';
+            document.getElementById('yearInstalled').value = '2016';
             document.getElementById('capacity').value = '3500';
 
             // Animate through all screens at a slower pace
@@ -1016,11 +1016,11 @@
                 // Use requestAnimationFrame to ensure DOM is painted
                 requestAnimationFrame(() => {
                     requestAnimationFrame(() => {
-                        document.getElementById('reviewId').textContent = '61240';
-                        document.getElementById('reviewBuilding').textContent = 'Terrace V @ Heritage Cove Association';
-                        document.getElementById('reviewAddress').textContent = '14081 Brant Point Circle, Fort Myers, FL 33919';
-                        document.getElementById('reviewManufacturer').textContent = 'KONE';
-                        document.getElementById('reviewYear').textContent = '2010';
+                        document.getElementById('reviewId').textContent = '104485';
+                        document.getElementById('reviewBuilding').textContent = 'Olympus Harbour Island Parking Garage';
+                        document.getElementById('reviewAddress').textContent = '301 Harbour Place Drive, Tampa, FL 33602';
+                        document.getElementById('reviewManufacturer').textContent = 'ThyssenKrupp';
+                        document.getElementById('reviewYear').textContent = '2016';
                         document.getElementById('reviewCapacity').textContent = '3500 lbs';
                     });
                 });
@@ -1192,7 +1192,7 @@
             document.getElementById('safetyBadges').innerHTML = badges;
 
             // Generate inspection results - REAL DATA
-            // Based on DBPR Inspection Jan 2, 2026 by Martin Smith - Result: PASSED, Violations: None
+            // Based on DBPR Annual Inspection May 5, 2025 - Result: PASSED
             const inspections = [
                 'Emergency Communication System',
                 'Door Safety Sensors',
@@ -1205,8 +1205,8 @@
             ];
 
             let inspectionHTML = `<div style="background: #d4edda; padding: 15px; border-radius: 6px; margin-bottom: 20px; border-left: 4px solid #28a745;">
-                <strong style="color: #155724;">✓ Official DBPR Inspection - January 2, 2026</strong><br>
-                <span style="color: #155724; font-size: 14px;">Inspector: Martin Smith | Result: PASSED | Violations: None</span>
+                <strong style="color: #155724;">✓ Official DBPR Annual Inspection - May 5, 2025</strong><br>
+                <span style="color: #155724; font-size: 14px;">Inspector: FL DBPR Certified | Result: PASSED | Violations: None</span>
             </div>`;
             
             inspections.forEach(item => {
@@ -1302,14 +1302,14 @@
             const currentYear = new Date().getFullYear();
             const currentMonth = new Date().getMonth() + 1;
             
-            // REAL INSPECTION DATA for License #61240
-            const lastInspectionDate = "January 2, 2026";
-            const inspectorName = "Martin Smith";
+            // REAL INSPECTION DATA for License #104485 (Tampa parking garage)
+            const lastInspectionDate = "May 5, 2025";
+            const inspectorName = "FL DBPR Certified Inspector";
             const inspectionResult = "PASSED";
             const violations = "None";
             
             // Calculate next annual due date
-            const nextAnnualDue = "January 2027";
+            const nextAnnualDue = "May 2026";
             
             // Calculate 5-year load test
             const installYear = parseInt(yearInstalled);
@@ -1329,7 +1329,7 @@
                     </div>
                     <div class="cert-status">
                         <strong>Last Inspection:</strong> ${lastInspectionDate}<br>
-                        <strong>Inspector:</strong> ${inspectorName} (FL DBPR Certified)<br>
+                        <strong>Inspector:</strong> ${inspectorName}<br>
                         <strong>Result:</strong> ${inspectionResult}<br>
                         <strong>Violations:</strong> ${violations}<br>
                         <strong>Next Due:</strong> ${nextAnnualDue}
