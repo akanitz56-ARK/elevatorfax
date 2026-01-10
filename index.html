@@ -406,6 +406,91 @@
             color: #856404;
         }
 
+        .cert-card {
+            background: rgba(10, 22, 40, 0.03);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--gold);
+        }
+
+        .cert-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .cert-title {
+            font-weight: 600;
+            font-size: 16px;
+            color: var(--navy);
+        }
+
+        .cert-date {
+            font-size: 13px;
+            color: var(--gray);
+        }
+
+        .cert-status {
+            margin-top: 8px;
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--navy);
+        }
+
+        .cert-alert {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+
+        .cert-alert-title {
+            font-weight: 600;
+            color: #856404;
+            margin-bottom: 5px;
+        }
+
+        .cert-alert-text {
+            font-size: 14px;
+            color: #856404;
+            line-height: 1.6;
+        }
+
+        /* Simulated data overlay */
+        .simulated-section {
+            position: relative;
+        }
+
+        .simulated-section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.6);
+            pointer-events: none;
+            border-radius: 8px;
+        }
+
+        .simulated-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(128, 128, 128, 0.9);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            z-index: 1;
+        }
+
         .history-timeline {
             position: relative;
             padding-left: 30px;
@@ -772,7 +857,8 @@
                     <div class="report-id">Generated: <span id="reportDate"></span></div>
                 </div>
 
-                <div class="score-card">
+                <div class="score-card simulated-section">
+                    <span class="simulated-badge">Sample Data</span>
                     <div class="score-number" id="safetyScore">-</div>
                     <div class="score-label">ElevatorFax Safety Score</div>
                     <div class="score-description">Based on maintenance history, inspection records, and equipment condition</div>
@@ -818,21 +904,44 @@
                 </div>
 
                 <div class="report-section">
+                    <div class="section-title">Florida Certification Status</div>
+                    <div id="floridaCertification"></div>
+                </div>
+
+                <div class="report-section">
+                    <div class="section-title">Financial Overview</div>
+                    <div id="financialOverview"></div>
+                </div>
+
+                <div class="report-section">
+                    <div class="section-title">Upcoming Requirements & Deadlines</div>
+                    <div id="upcomingDeadlines"></div>
+                </div>
+
+                <div class="report-section">
+                    <div class="section-title">Modernization Recommendations</div>
+                    <div id="modernizationRecs"></div>
+                </div>
+
+                <div class="report-section">
                     <div class="section-title">Latest Inspection Results</div>
                     <div class="inspection-grid" id="inspectionGrid"></div>
                 </div>
 
-                <div class="report-section">
+                <div class="report-section simulated-section">
+                    <span class="simulated-badge">Sample Data</span>
                     <div class="section-title">Maintenance & Service History</div>
                     <div class="history-timeline" id="maintenanceTimeline"></div>
                 </div>
 
-                <div class="report-section">
+                <div class="report-section simulated-section">
+                    <span class="simulated-badge">Sample Data</span>
                     <div class="section-title">Major Events & Upgrades</div>
                     <div class="history-timeline" id="majorEvents"></div>
                 </div>
 
-                <div class="report-section">
+                <div class="report-section simulated-section">
+                    <span class="simulated-badge">Sample Data</span>
                     <div class="section-title">Component Status</div>
                     <div class="info-grid" id="componentGrid"></div>
                 </div>
@@ -858,15 +967,16 @@
         const totalScreens = 6;
         const formData = {};
 
-        // Load demo data
+        // Load demo data - REAL Florida Elevator with REAL inspection data
         function loadDemo() {
-            // Fill in all the demo data in form fields
-            document.getElementById('elevatorId').value = 'ELV-2019-847362';
-            document.getElementById('buildingName').value = 'Salesforce Tower';
-            document.getElementById('address').value = '415 Mission Street, San Francisco, CA 94105';
-            document.getElementById('manufacturer').value = 'Otis';
-            document.getElementById('yearInstalled').value = '2019';
-            document.getElementById('capacity').value = '4500';
+            // Fill in with REAL Florida elevator data
+            // License #61240 - Terrace V @ Heritage Cove, Fort Myers
+            document.getElementById('elevatorId').value = '61240';
+            document.getElementById('buildingName').value = 'Terrace V @ Heritage Cove Association';
+            document.getElementById('address').value = '14081 Brant Point Circle, Fort Myers, FL 33919';
+            document.getElementById('manufacturer').value = 'KONE';
+            document.getElementById('yearInstalled').value = '2010';
+            document.getElementById('capacity').value = '3500';
 
             // Animate through all screens at a slower pace
             setTimeout(() => {
@@ -906,12 +1016,12 @@
                 // Use requestAnimationFrame to ensure DOM is painted
                 requestAnimationFrame(() => {
                     requestAnimationFrame(() => {
-                        document.getElementById('reviewId').textContent = 'ELV-2019-847362';
-                        document.getElementById('reviewBuilding').textContent = 'Salesforce Tower';
-                        document.getElementById('reviewAddress').textContent = '415 Mission Street, San Francisco, CA 94105';
-                        document.getElementById('reviewManufacturer').textContent = 'Otis';
-                        document.getElementById('reviewYear').textContent = '2019';
-                        document.getElementById('reviewCapacity').textContent = '4500 lbs';
+                        document.getElementById('reviewId').textContent = '61240';
+                        document.getElementById('reviewBuilding').textContent = 'Terrace V @ Heritage Cove Association';
+                        document.getElementById('reviewAddress').textContent = '14081 Brant Point Circle, Fort Myers, FL 33919';
+                        document.getElementById('reviewManufacturer').textContent = 'KONE';
+                        document.getElementById('reviewYear').textContent = '2010';
+                        document.getElementById('reviewCapacity').textContent = '3500 lbs';
                     });
                 });
             }, 2500);
@@ -1081,7 +1191,8 @@
             badges += '<span class="badge badge-success">✓ Code Compliant</span>';
             document.getElementById('safetyBadges').innerHTML = badges;
 
-            // Generate inspection results
+            // Generate inspection results - REAL DATA
+            // Based on DBPR Inspection Jan 2, 2026 by Martin Smith - Result: PASSED, Violations: None
             const inspections = [
                 'Emergency Communication System',
                 'Door Safety Sensors',
@@ -1093,7 +1204,11 @@
                 'Load Testing'
             ];
 
-            let inspectionHTML = '';
+            let inspectionHTML = `<div style="background: #d4edda; padding: 15px; border-radius: 6px; margin-bottom: 20px; border-left: 4px solid #28a745;">
+                <strong style="color: #155724;">✓ Official DBPR Inspection - January 2, 2026</strong><br>
+                <span style="color: #155724; font-size: 14px;">Inspector: Martin Smith | Result: PASSED | Violations: None</span>
+            </div>`;
+            
             inspections.forEach(item => {
                 inspectionHTML += `
                     <div class="inspection-row">
@@ -1172,6 +1287,347 @@
                 `;
             });
             document.getElementById('componentGrid').innerHTML = componentHTML;
+
+            // Generate Florida Certification Status
+            generateFloridaCertification(age, formData.yearInstalled);
+            
+            // Generate new sections
+            generateFinancialOverview(age, formData.capacity, formData.yearInstalled);
+            generateUpcomingDeadlines(age, formData.yearInstalled);
+            generateModernizationRecommendations(age, formData.yearInstalled, formData.manufacturer);
+        }
+
+        // Generate Florida Certification Status
+        function generateFloridaCertification(age, yearInstalled) {
+            const currentYear = new Date().getFullYear();
+            const currentMonth = new Date().getMonth() + 1;
+            
+            // REAL INSPECTION DATA for License #61240
+            const lastInspectionDate = "January 2, 2026";
+            const inspectorName = "Martin Smith";
+            const inspectionResult = "PASSED";
+            const violations = "None";
+            
+            // Calculate next annual due date
+            const nextAnnualDue = "January 2027";
+            
+            // Calculate 5-year load test
+            const installYear = parseInt(yearInstalled);
+            const yearsSinceLastLoadTest = (currentYear - installYear) % 5;
+            const lastLoadTestYear = currentYear - yearsSinceLastLoadTest;
+            const nextLoadTestYear = lastLoadTestYear + 5;
+            const nextLoadTestDue = `December ${nextLoadTestYear}`;
+            
+            let html = '';
+            
+            // Annual Inspection Card - REAL DATA
+            html += `
+                <div class="cert-card">
+                    <div class="cert-header">
+                        <div class="cert-title">Annual State Inspection</div>
+                        <span class="badge badge-success">CURRENT</span>
+                    </div>
+                    <div class="cert-status">
+                        <strong>Last Inspection:</strong> ${lastInspectionDate}<br>
+                        <strong>Inspector:</strong> ${inspectorName} (FL DBPR Certified)<br>
+                        <strong>Result:</strong> ${inspectionResult}<br>
+                        <strong>Violations:</strong> ${violations}<br>
+                        <strong>Next Due:</strong> ${nextAnnualDue}
+                    </div>
+                </div>
+            `;
+            
+            // 5-Year Load Test Card - CALCULATED/ESTIMATED
+            const loadTestStatus = yearsSinceLastLoadTest < 4 ? 'CURRENT' : 'DUE SOON';
+            const loadTestBadge = yearsSinceLastLoadTest < 4 ? 'badge-success' : 'badge-warning';
+            
+            html += `
+                <div class="cert-card" style="position: relative;">
+                    <span class="simulated-badge" style="background: rgba(128, 128, 128, 0.9); color: white; padding: 5px 12px; border-radius: 4px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; position: absolute; top: 10px; right: 10px; z-index: 1;">Estimated</span>
+                    <div class="cert-header">
+                        <div class="cert-title">5-Year Load Testing</div>
+                        <span class="badge ${loadTestBadge}">${loadTestStatus}</span>
+                    </div>
+                    <div class="cert-status">
+                        <strong>Last Test:</strong> ${lastLoadTestYear}<br>
+                        <strong>Next Due:</strong> ${nextLoadTestDue}<br>
+                        <strong>Load Tested:</strong> ${formData.capacity} lbs (125% of rated capacity)<br>
+                        <strong>Result:</strong> Passed
+                    </div>
+                </div>
+            `;
+            
+            // Certificate of Operation Card - CALCULATED
+            html += `
+                <div class="cert-card" style="position: relative;">
+                    <span class="simulated-badge" style="background: rgba(128, 128, 128, 0.9); color: white; padding: 5px 12px; border-radius: 4px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; position: absolute; top: 10px; right: 10px; z-index: 1;">Estimated</span>
+                    <div class="cert-header">
+                        <div class="cert-title">Certificate of Operation</div>
+                        <span class="badge badge-success">POSTED</span>
+                    </div>
+                    <div class="cert-status">
+                        <strong>License #:</strong> ${formData.elevatorId}<br>
+                        <strong>Issued By:</strong> Florida Department of Business & Professional Regulation<br>
+                        <strong>Valid Through:</strong> ${nextAnnualDue}<br>
+                        <strong>Status:</strong> Posted in elevator cab as required by FL Statute 399
+                    </div>
+                </div>
+            `;
+            
+            // Emergency Communication System - TYPICAL/ASSUMED
+            html += `
+                <div class="cert-card" style="position: relative;">
+                    <span class="simulated-badge" style="background: rgba(128, 128, 128, 0.9); color: white; padding: 5px 12px; border-radius: 4px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; position: absolute; top: 10px; right: 10px; z-index: 1;">Typical</span>
+                    <div class="cert-header">
+                        <div class="cert-title">Emergency Communication System</div>
+                        <span class="badge badge-success">COMPLIANT</span>
+                    </div>
+                    <div class="cert-status">
+                        <strong>System Type:</strong> Two-way voice communication<br>
+                        <strong>Connection:</strong> 24/7 monitoring service<br>
+                        <strong>Last Test:</strong> ${lastInspectionDate}<br>
+                        <strong>Compliance:</strong> Meets ASME A17.1 and FL requirements
+                    </div>
+                </div>
+            `;
+            
+            // Add alert if load test is due soon
+            if (yearsSinceLastLoadTest >= 4) {
+                html = `
+                    <div class="cert-alert">
+                        <div class="cert-alert-title">⚠️ Action Required</div>
+                        <div class="cert-alert-text">
+                            5-Year Load Testing due by ${nextLoadTestDue}. Schedule with a Florida-licensed elevator contractor to maintain compliance with FL Statute 399.
+                        </div>
+                    </div>
+                ` + html;
+            }
+            
+            document.getElementById('floridaCertification').innerHTML = html;
+        }
+
+        // Generate Financial Overview
+        function generateFinancialOverview(age, capacity, yearInstalled) {
+            const capacityNum = parseInt(capacity);
+            
+            // Calculate estimated replacement cost based on capacity and floors (estimated from travel distance)
+            // Industry average: $100k-$300k for standard traction elevator
+            const baseReplacementCost = 150000;
+            const capacityCost = (capacityNum / 2500) * 50000; // Larger capacity costs more
+            const estimatedReplacementCost = Math.round((baseReplacementCost + capacityCost) / 1000) * 1000;
+            
+            // Calculate expected lifespan remaining (typical is 25 years)
+            const typicalLifespan = 25;
+            const remainingYears = Math.max(0, typicalLifespan - age);
+            
+            // Annual maintenance cost estimate
+            const annualMaintenanceCost = 5000 + (age * 200); // Increases with age
+            
+            let html = `
+                <div class="info-grid">
+                    <div class="info-card">
+                        <div class="info-label">Estimated Replacement Cost</div>
+                        <div class="info-value">$${estimatedReplacementCost.toLocaleString()}</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-label">Expected Lifespan Remaining</div>
+                        <div class="info-value">${remainingYears} years</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-label">Est. Annual Maintenance</div>
+                        <div class="info-value">$${annualMaintenanceCost.toLocaleString()}</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-label">Current Market Value Impact</div>
+                        <div class="info-value">${age < 10 ? 'Positive' : age < 20 ? 'Neutral' : 'Negative'}</div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 20px; padding: 15px; background: rgba(10, 22, 40, 0.03); border-radius: 6px; font-size: 13px; line-height: 1.6;">
+                    <strong>Note:</strong> Estimates based on industry averages for ${capacityNum}-lb capacity traction elevators. 
+                    Actual costs may vary based on building configuration, local labor rates, and specific equipment requirements.
+                </div>
+            `;
+            
+            document.getElementById('financialOverview').innerHTML = html;
+        }
+
+        // Generate Upcoming Deadlines
+        function generateUpcomingDeadlines(age, yearInstalled) {
+            const currentYear = new Date().getFullYear();
+            const currentDate = new Date();
+            
+            // Calculate next inspection (typically annual)
+            const nextInspectionDate = new Date(2027, 0, 2); // Jan 2, 2027
+            const daysUntilInspection = Math.ceil((nextInspectionDate - currentDate) / (1000 * 60 * 60 * 24));
+            
+            // Calculate next 5-year test
+            const yearsSinceLastLoadTest = (currentYear - parseInt(yearInstalled)) % 5;
+            const nextLoadTestYear = currentYear - yearsSinceLastLoadTest + 5;
+            const daysUntilLoadTest = Math.ceil((new Date(nextLoadTestYear, 11, 31) - currentDate) / (1000 * 60 * 60 * 24));
+            
+            // Service contract renewal (estimated)
+            const contractRenewalDate = new Date(currentYear, 11, 31);
+            const daysUntilContract = Math.ceil((contractRenewalDate - currentDate) / (1000 * 60 * 60 * 24));
+            
+            let html = `
+                <div style="display: grid; gap: 15px;">
+                    <div class="cert-card">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <div>
+                                <div style="font-weight: 600; font-size: 16px; color: var(--navy); margin-bottom: 5px;">Annual State Inspection</div>
+                                <div style="font-size: 14px; color: var(--gray);">Due: January 2027</div>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="font-size: 24px; font-weight: bold; color: ${daysUntilInspection < 90 ? '#856404' : '#155724'};">${daysUntilInspection}</div>
+                                <div style="font-size: 12px; color: var(--gray);">days</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="cert-card">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <div>
+                                <div style="font-weight: 600; font-size: 16px; color: var(--navy); margin-bottom: 5px;">5-Year Load Testing</div>
+                                <div style="font-size: 14px; color: var(--gray);">Due: December ${nextLoadTestYear}</div>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="font-size: 24px; font-weight: bold; color: ${daysUntilLoadTest < 365 ? '#856404' : '#155724'};">${Math.round(daysUntilLoadTest / 30)}</div>
+                                <div style="font-size: 12px; color: var(--gray);">months</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="cert-card" style="position: relative;">
+                        <span class="simulated-badge" style="background: rgba(128, 128, 128, 0.9); color: white; padding: 5px 12px; border-radius: 4px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; position: absolute; top: 10px; right: 10px; z-index: 1;">Estimated</span>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <div>
+                                <div style="font-weight: 600; font-size: 16px; color: var(--navy); margin-bottom: 5px;">Service Contract Renewal</div>
+                                <div style="font-size: 14px; color: var(--gray);">Estimated: December ${currentYear}</div>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="font-size: 24px; font-weight: bold; color: ${daysUntilContract < 60 ? '#856404' : '#155724'};">${daysUntilContract}</div>
+                                <div style="font-size: 12px; color: var(--gray);">days</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('upcomingDeadlines').innerHTML = html;
+        }
+
+        // Generate Modernization Recommendations
+        function generateModernizationRecommendations(age, yearInstalled, manufacturer) {
+            let recommendations = [];
+            
+            if (age >= 15) {
+                recommendations.push({
+                    priority: 'HIGH',
+                    item: 'Control System Upgrade',
+                    reason: 'Elevator is over 15 years old. Modern microprocessor controls improve reliability and reduce energy consumption by 30-40%.',
+                    cost: '$25,000 - $50,000',
+                    timeline: 'Within 12 months'
+                });
+            }
+            
+            if (age >= 20) {
+                recommendations.push({
+                    priority: 'HIGH',
+                    item: 'Door Operator Replacement',
+                    reason: 'Original door operators may be approaching end of life. New operators reduce breakdowns and improve passenger flow.',
+                    cost: '$8,000 - $15,000',
+                    timeline: 'Within 6 months'
+                });
+            }
+            
+            if (age >= 10) {
+                recommendations.push({
+                    priority: 'MEDIUM',
+                    item: 'LED Lighting Upgrade',
+                    reason: 'Upgrade to LED lighting reduces energy costs by 75% and improves cab aesthetics.',
+                    cost: '$2,000 - $4,000',
+                    timeline: 'Next 12-24 months'
+                });
+            }
+            
+            if (age >= 15) {
+                recommendations.push({
+                    priority: 'MEDIUM',
+                    item: 'Destination Dispatch System',
+                    reason: 'Modern dispatch system reduces wait times and improves traffic management for multi-elevator buildings.',
+                    cost: '$50,000 - $100,000',
+                    timeline: 'Next 2-3 years'
+                });
+            }
+            
+            // Always recommend monitoring
+            recommendations.push({
+                priority: 'LOW',
+                item: 'IoT Monitoring System',
+                reason: 'Real-time monitoring detects issues before failures occur, reducing downtime by up to 50%.',
+                cost: '$3,000 - $8,000',
+                timeline: 'Consider for next budget cycle'
+            });
+            
+            // Add ADA compliance check
+            if (yearInstalled < 2010) {
+                recommendations.push({
+                    priority: 'MEDIUM',
+                    item: 'ADA Compliance Audit',
+                    reason: 'Ensure elevator meets current ADA accessibility standards including proper signage, handrails, and communication devices.',
+                    cost: '$1,500 - $5,000',
+                    timeline: 'Within 12 months'
+                });
+            }
+            
+            let html = '';
+            
+            if (recommendations.length === 0) {
+                html = `
+                    <div style="padding: 30px; text-align: center; background: rgba(212, 175, 55, 0.05); border-radius: 8px;">
+                        <div style="font-size: 48px; margin-bottom: 15px;">✓</div>
+                        <div style="font-size: 18px; font-weight: 600; color: var(--navy); margin-bottom: 10px;">No Critical Upgrades Needed</div>
+                        <div style="font-size: 14px; color: var(--gray);">This elevator is modern and well-maintained. Continue regular inspection and maintenance schedules.</div>
+                    </div>
+                `;
+            } else {
+                recommendations.forEach(rec => {
+                    const priorityColor = rec.priority === 'HIGH' ? '#dc3545' : rec.priority === 'MEDIUM' ? '#ffc107' : '#28a745';
+                    const priorityBg = rec.priority === 'HIGH' ? '#f8d7da' : rec.priority === 'MEDIUM' ? '#fff3cd' : '#d4edda';
+                    
+                    html += `
+                        <div class="cert-card" style="margin-bottom: 20px;">
+                            <div style="display: flex; justify-content: between; align-items: start; margin-bottom: 15px;">
+                                <div style="flex: 1;">
+                                    <div style="font-weight: 600; font-size: 18px; color: var(--navy); margin-bottom: 5px;">${rec.item}</div>
+                                    <span style="background: ${priorityBg}; color: ${priorityColor}; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 600; text-transform: uppercase;">${rec.priority} PRIORITY</span>
+                                </div>
+                            </div>
+                            <div style="font-size: 14px; line-height: 1.6; color: var(--navy); margin-bottom: 15px;">${rec.reason}</div>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding-top: 15px; border-top: 1px solid rgba(10, 22, 40, 0.1);">
+                                <div>
+                                    <div style="font-size: 11px; color: var(--gray); text-transform: uppercase; margin-bottom: 5px;">Estimated Cost</div>
+                                    <div style="font-weight: 600; color: var(--navy);">${rec.cost}</div>
+                                </div>
+                                <div>
+                                    <div style="font-size: 11px; color: var(--gray); text-transform: uppercase; margin-bottom: 5px;">Recommended Timeline</div>
+                                    <div style="font-weight: 600; color: var(--navy);">${rec.timeline}</div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                html += `
+                    <div style="margin-top: 20px; padding: 15px; background: rgba(10, 22, 40, 0.03); border-radius: 6px; font-size: 13px; line-height: 1.6;">
+                        <strong>Note:</strong> These recommendations are based on elevator age and industry best practices. 
+                        Consult with a licensed elevator contractor for detailed assessments and accurate cost estimates.
+                    </div>
+                `;
+            }
+            
+            document.getElementById('modernizationRecs').innerHTML = html;
         }
 
         // Initialize
